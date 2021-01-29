@@ -1,0 +1,26 @@
+#!groovy
+// Поверка.
+properties([disableConcurrentBuilds()]) //запертить одноврем сборки
+
+pipeline {
+    agent { 
+        label 'master'
+        }
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
+        timestamps()
+    }
+    stages {
+        stage("one") {
+            steps {
+                sh 'ssh root@target \'hostname;date;pwd\''
+            }
+        }
+        stage("two") {
+            steps {
+                sh 'ssh root@target \'who;uptime;ls;\''
+            }
+        }
+    }
+}
+//
