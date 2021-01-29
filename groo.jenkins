@@ -18,7 +18,7 @@ pipeline {
         }
         stage("two") {
             steps {
-                sh 'ssh root@target \'who;uptime;ls;\''
+                sh 'ssh root@target \'who;whoami;uptime;ls;\''
             }
         }
     }
